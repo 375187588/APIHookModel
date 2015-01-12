@@ -6,7 +6,7 @@
 #include <wdf.h>
 #endif
 
-DRIVER_INITIALIZE DriverEntry;   //驱动入口函数
+DRIVER_INITIALIZE DriverEntry;   //椹卞姩鍏ュ彛鍑芥暟
 #else
 #error "This operating system is not supported"
 #endif
