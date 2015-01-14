@@ -4,8 +4,7 @@
 #include <windows.h>
 #endif // Windows
 
-UserAPIHOOKSet *UserSetHookTable = NULL;
-size_t UserAPIHOOKSize = 0;
+extern UserAPIHOOKSet UserSetHookTable[];
 
 #ifdef Windows
 #ifdef __cplusplus
@@ -16,11 +15,18 @@ extern "C"
 	{
 		if( UserSetHookTable )
 		{
-			assert(UserAPIHOOKSize);
-			for( size_t TopTable = 0; TopTable < UserAPIHOOKSize; TopTable++ )
+			//设置当前表项
+			UserAPIHOOKSet *ThisTable = UserSetHookTable;
+			//自动机逻辑操作，执行拦截函数表的检查和修正
+			while( ( ( *( ThisTable ) ).New == NULL ) || ( ( *( ThisTable ) ).Old == NULL ) )
 			{
-				UserAPIHOOKSet *pUserAPIHOOKTableTop = &( UserSetHookTable[TopTable] );
-				assert(pUserAPIHOOKTableTop = ( &UserSetHookTable[TopTable] ));
+				ThisTable++;
+			}
+			//复位
+			ThisTable = UserSetHookTable;
+			//执行拦截操作
+			while( ( ( *( ThisTable ) ).New == NULL ) || ( ( *( ThisTable ) ).Old == NULL ) )
+			{
 				if( fdwReason == DLL_PROCESS_ATTACH )
 				{
 					//加载DLL
@@ -29,6 +35,7 @@ extern "C"
 				{
 					//释放DLL
 				}
+				ThisTable++;
 			}
 		}
 		

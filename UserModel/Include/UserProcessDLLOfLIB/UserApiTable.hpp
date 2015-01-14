@@ -2,13 +2,12 @@
 #define USERAPITABLE
 #include "UserAPIHOOKSet.h"
 #include "../Base.h"
-extern UserAPIHOOKSet *UserSetHookTable;
-extern size_t UserAPIHOOKSize;
-#define BEGIN_APITABLE(InitTable,MaxTableSize) UserAPIHOOKSet InitTable[MaxTableSize]={
-#define END_APITABLE()  };
-#define SET_TABLE(InitTable) UserSetHookTable=InitTable;UserAPIHOOKSize=sizeof(InitTable)/sizeof(UserAPIHOOKSet)
+#define BEGIN_TABLE() UserAPIHOOKSet UserSetHookTable[]={
+#define SET_TABLE(Old,New) {Old,New},
+#define END_TABLE()  {NULL,NULL}};
 #ifdef Windows
 #include <windows.h>
-FUNCTION(bool , DEFAULT_CALL , CallNextTable)( PROC* , PROC* , bool );
+FUNCTION(PROC , DEFAULT_CALL , GetNextTable)( PROC );
 #endif
+#define GetNextTableFunction(type,ThisPROC) (type)(GetNextTable((PROC)((type)ThisPROC))
 #endif // USERAPITABLE

@@ -20,7 +20,6 @@
 #ifndef STATIC_LIB
 #define INTERFACE_CLASS(ThisClass) class INTERFACE ThisClass
 #define INTERFACE_FUNCTION(Return,Call,Name)  INTERFACE Return Call Name
-#define INTERFACE_FUNCTION(Return,Name)       INTERFACE Return __stdcall Name
 #endif
 #define CLASS(ThisClass) class ThisClass
 #define FUNCTION(Return,Call,Name)  Return Call Name
@@ -28,7 +27,6 @@
 #ifndef STATIC_LIB
 #define INTERFACE_CLASS(ThisClass)
 #define INTERFACE_FUNCTION(Return,Call,Name)
-#define INTERFACE_FUNCTION(Return,Name)
 #endif
 #define CLASS(ThisClass)
 #define FUNCTION(Return,Call,Name)
