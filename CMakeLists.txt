@@ -1,1 +1,5 @@
-project(APIHookModel)
+project(ApiHookModel)
+cmake_minimum_required(VERSION 2.8)
+add_subdirectory(UserModel/Src)
+INCLUDE_DIRECTORIES(UserModel/Include)
+install(DIRECTORY UserModel/Include DESTINATION ./serModel/Include)
