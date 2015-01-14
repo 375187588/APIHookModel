@@ -1,5 +1,5 @@
 project(UserProcessDllForBaseLib)
-add_library(UserProcessDllForBaseLib STATIC dllmain.cpp UserApiTable.cpp)
+add_library(UserProcessDllForBaseLib STATIC MainContral.cpp)
 IF(WIN32)
 add_definitions(-DWindows -DAPIHOOK_Ring3 -DSTATIC_LIB)
 ELSE(UNIX)
